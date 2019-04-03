@@ -18,7 +18,7 @@ namespace DescriptiveStatistics
         {
             int maximum = Maximum(source);
             double mean = Mean(source);
-            int median = Median(source);
+            double median = Median(source);
             int minimum = Minimum(source);
             int range = Range(source);
 
@@ -65,11 +65,17 @@ namespace DescriptiveStatistics
         /// </summary>
         /// <param name="source">The integers to analyze.</param>
         /// <returns></returns>
-        public static int Median(int[] source)
+        public static double Median(int[] source)
         {
             var list = new List<int>(source);
+            int index = list.Capacity / 2; // truncates to int in case of float
             list.Sort();
-            return list[list.Capacity / 2 - 1];
+
+            // If uneven, pick middle value, else take average of two middle values
+            double median = list.Capacity % 2 == 1 ?
+                list[index] :
+                Mean(new int[] { list[index - 1], list[index] });
+            return median;
         }
 
         /// <summary>
