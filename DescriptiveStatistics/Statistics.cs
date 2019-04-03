@@ -108,12 +108,16 @@ namespace DescriptiveStatistics
         /// <returns></returns>
         public static int[] Mode(int[] source)
         {
+            // Create dictionary of key value pairs: key=source integer, value=no of observations.
             var dict = source
                 .GroupBy(x => x)
                 .ToDictionary(x => x.Key, x => x.Count());
 
-            return dict.Where(x => x.Value == dict.Values.Max())
+            // Filter out max value and return an array of the corresponding keys
+            return dict
+                .Where(x => x.Value == dict.Values.Max())
                 .Select(x => x.Key)
+                .OrderBy(x => x)
                 .ToArray();
         }
     }

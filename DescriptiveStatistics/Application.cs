@@ -39,8 +39,14 @@ namespace DescriptiveStatistics
         }
         private static void ViewResult(dynamic source)
         {
+            // string mode = source.Mode.join()
             Console.WriteLine($"Maximum: {source.Maximum}");
-
+            Console.WriteLine($"Minimum: {source.Minimum}");
+            Console.WriteLine($"Medelvärde: {source.Mean:f1}");
+            Console.WriteLine($"Median: {source.Median}");
+            Console.WriteLine($"Typvärde: {string.Join(", ", source.Mode)}");
+            Console.WriteLine($"Variationsbredd: {source.Range}");
+            Console.WriteLine($"Standardavvikelse: {source.StandardDeviation:f1}");
         }
     }
 }
