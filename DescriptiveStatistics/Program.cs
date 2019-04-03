@@ -1,17 +1,19 @@
-﻿using System;
-using System.IO;
-using Newtonsoft.Json;
-
-namespace DescriptiveStatistics
+﻿namespace DescriptiveStatistics
 {
+    /// <summary>
+    /// Represents the main place where the program starts the execution.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// The starting point of the application.
+        /// </summary>
+        /// <param name="args">Array containing arguments passed to the application.</param>
         static void Main(string[] args)
         {
             {
-                string json = File.ReadAllText(args[0]);
-                int[] statistics = JsonConvert.DeserializeObject<int[]>(json);
-                Console.WriteLine(statistics[0] + statistics[1]); // 106
+                Application.SourceFile = args[0];
+                Application.Run();
             }
         }
     }
