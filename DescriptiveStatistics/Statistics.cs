@@ -21,6 +21,7 @@ namespace DescriptiveStatistics
             double median = Median(source);
             int minimum = Minimum(source);
             int range = Range(source);
+            double standardDeviation = StandardDeviation(source);
 
             var summary = new
             {
@@ -28,7 +29,8 @@ namespace DescriptiveStatistics
                 Mean = mean,
                 Median = median,
                 Minimum = minimum,
-                Range = range
+                Range = range,
+                StandardDeviation = standardDeviation
 
             };
 
@@ -84,6 +86,18 @@ namespace DescriptiveStatistics
         /// <param name="source">The integers to analyze.</param>
         /// <returns></returns>
         public static int Range(int[] source) => Maximum(source) - Minimum(source);
+
+        /// <summary>
+        /// Returns the standard deviation from an array of integers.
+        /// </summary>
+        /// <param name="source">The integers to analyze.</param>
+        /// <returns></returns>
+        public static double StandardDeviation(int[] source)
+        {
+            double mean = Mean(source);
+            var list = new List<double>(source.Select(x => Math.Pow((x - mean), 2)));
+            return Math.Sqrt(list.Average());
+        }
     }
 
 }
