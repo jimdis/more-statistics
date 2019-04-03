@@ -24,12 +24,23 @@ namespace DescriptiveStatistics
                 string json = File.ReadAllText(SourceFile);
                 int[] statistics = JsonConvert.DeserializeObject<int[]>(json);
                 var descriptiveStatistics = Statistics.DescriptiveStatistics(statistics);
-                Console.WriteLine(descriptiveStatistics);
+                ViewResult(descriptiveStatistics);
+                // foreach (int val in descriptiveStatistics.Mode)
+                // {
+                //     Console.WriteLine(val);
+                // }
+                // Console.WriteLine(descriptiveStatistics);
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(ex.Message);
+                Console.Error.WriteLine($"ERROR: {ex.Message}");
             }
+
+        }
+        private static void ViewResult(dynamic source)
+        {
+            Console.WriteLine($"Maximum: {source.Maximum}");
+
         }
     }
 }

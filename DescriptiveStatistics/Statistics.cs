@@ -22,6 +22,7 @@ namespace DescriptiveStatistics
             int minimum = Minimum(source);
             int range = Range(source);
             double standardDeviation = StandardDeviation(source);
+            int[] mode = Mode(source);
 
             var summary = new
             {
@@ -30,7 +31,8 @@ namespace DescriptiveStatistics
                 Median = median,
                 Minimum = minimum,
                 Range = range,
-                StandardDeviation = standardDeviation
+                StandardDeviation = standardDeviation,
+                Mode = mode
 
             };
 
@@ -97,6 +99,22 @@ namespace DescriptiveStatistics
             double mean = Mean(source);
             var list = new List<double>(source.Select(x => Math.Pow((x - mean), 2)));
             return Math.Sqrt(list.Average());
+        }
+
+        /// <summary>
+        /// Returns the mode from an array of integers.
+        /// </summary>
+        /// <param name="source">The integers to analyze.</param>
+        /// <returns></returns>
+        public static int[] Mode(int[] source)
+        {
+            var dict = source
+                .GroupBy(x => x)
+                .ToDictionary(x => x.Key, x => x.Count());
+
+            return dict.Where(x => x.Value == dict.Values.Max())
+                .Select(x => x.Key)
+                .ToArray();
         }
     }
 
