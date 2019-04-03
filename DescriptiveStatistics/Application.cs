@@ -13,6 +13,7 @@ namespace DescriptiveStatistics
         /// The file to read from.
         /// </summary>
         public static string SourceFile { get; set; }
+
         /// <summary>
         /// Runs an application.
         /// </summary>
@@ -22,7 +23,8 @@ namespace DescriptiveStatistics
             {
                 string json = File.ReadAllText(SourceFile);
                 int[] statistics = JsonConvert.DeserializeObject<int[]>(json);
-                Console.WriteLine(statistics[0] + statistics[1]); // 106
+                var descriptiveStatistics = Statistics.DescriptiveStatistics(statistics);
+                Console.WriteLine(descriptiveStatistics); // 106
             }
             catch (Exception ex)
             {
