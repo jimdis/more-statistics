@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+
 namespace DescriptiveStatistics
 {
     /// <summary>
@@ -7,8 +10,15 @@ namespace DescriptiveStatistics
     {
         public static dynamic DescriptiveStatistics(int[] source)
         {
-            return source[0] + source[1]; // 106
+            int maximum = Maximum(source);
 
+            var summary = new
+            {
+                Maximum = maximum
+            };
+
+            return summary;
         }
+        public static int Maximum(int[] source) => source.Max();
     }
 }

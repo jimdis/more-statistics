@@ -24,7 +24,7 @@ namespace DescriptiveStatistics
                 string json = File.ReadAllText(SourceFile);
                 int[] statistics = JsonConvert.DeserializeObject<int[]>(json);
                 var descriptiveStatistics = Statistics.DescriptiveStatistics(statistics);
-                Console.WriteLine(descriptiveStatistics); // 106
+                Console.WriteLine(descriptiveStatistics);
             }
             catch (Exception ex)
             {
