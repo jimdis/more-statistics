@@ -24,32 +24,32 @@ namespace DescriptiveStatistics
             try
             {
                 string json = File.ReadAllText(SourceFile);
-                int[] statistics = JsonConvert.DeserializeObject<int[]>(json);
-                var descriptiveStatistics = Statistics.DescriptiveStatistics(statistics);
-                ViewResult(descriptiveStatistics);
-                // foreach (int val in descriptiveStatistics.Mode)
-                // {
-                //     Console.WriteLine(val);
-                // }
-                // Console.WriteLine(descriptiveStatistics);
+                int[] numbers = JsonConvert.DeserializeObject<int[]>(json);
+                var statistics = Statistics.DescriptiveStatistics(numbers);
+                ViewResult(statistics);
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine($"ERROR: {ex.Message}");
+                Console.Error.WriteLine($"ERROR: {ex}");
             }
 
         }
-        private static void ViewResult(dynamic source)
+
+        /// <summary>
+        /// Prints out a table of descriptive statistics to the console.
+        /// </summary>
+        /// <param name="statistics">The dynamic object containing the descriptive statistics</param>
+        private static void ViewResult(dynamic statistics)
         {
             var dict = new Dictionary<string, string>
                 {
-                    ["Maximum"] = $"{source.Maximum}",
-                    ["Minimum"] = $"{source.Minimum}",
-                    ["Medelvärde"] = $"{source.Mean:f1}",
-                    ["Median"] = $"{source.Median}",
-                    ["Typvärde"] = $"{string.Join(", ", source.Mode)}",
-                    ["Variationsbredd"] = $"{source.Range}",
-                    ["Standardavvikelse"] = $"{source.StandardDeviation:f1}"
+                    ["Maximum"] = $"{statistics.Maximum}",
+                    ["Minimum"] = $"{statistics.Minimum}",
+                    ["Medelvärde"] = $"{statistics.Mean:f1}",
+                    ["Median"] = $"{statistics.Median}",
+                    ["Typvärde"] = $"{string.Join(", ", statistics.Mode)}",
+                    ["Variationsbredd"] = $"{statistics.Range}",
+                    ["Standardavvikelse"] = $"{statistics.StandardDeviation:f1}"
 
                 };
             int padding = dict
