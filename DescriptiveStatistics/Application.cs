@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace DescriptiveStatistics
@@ -39,14 +41,30 @@ namespace DescriptiveStatistics
         }
         private static void ViewResult(dynamic source)
         {
-            // string mode = source.Mode.join()
-            Console.WriteLine($"Maximum: {source.Maximum}");
-            Console.WriteLine($"Minimum: {source.Minimum}");
-            Console.WriteLine($"Medelvärde: {source.Mean:f1}");
-            Console.WriteLine($"Median: {source.Median}");
-            Console.WriteLine($"Typvärde: {string.Join(", ", source.Mode)}");
-            Console.WriteLine($"Variationsbredd: {source.Range}");
-            Console.WriteLine($"Standardavvikelse: {source.StandardDeviation:f1}");
+            var dict = new Dictionary<string, string>
+                {
+                    ["Maximum"] = $"{source.Maximum}",
+                    ["Minimum"] = $"{source.Minimum}",
+                    ["Medelvärde"] = $"{source.Mean:f1}",
+                    ["Median"] = $"{source.Median}",
+                    ["Typvärde"] = $"{string.Join(", ", source.Mode)}",
+                    ["Variationsbredd"] = $"{source.Range}",
+                    ["Standardavvikelse"] = $"{source.StandardDeviation:f1}"
+
+                };
+            int padding = dict
+                .Select(x => x.Key)
+                .OrderByDescending(x => x.Length)
+                .ToArray() [0].Length;
+
+            // Console.WriteLine("\n----------------------");
+            Console.WriteLine("\nDeskriptiv statistik");
+            Console.WriteLine("-------------------------");
+            foreach (KeyValuePair<string, string> kvp in dict)
+            {
+                Console.WriteLine($"{kvp.Key.PadRight(padding)}: {kvp.Value}");
+            }
+            Console.WriteLine("-------------------------\n");
         }
     }
 }
