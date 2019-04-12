@@ -51,11 +51,7 @@ namespace DescriptiveStatistics
         /// </summary>
         /// <param name="source">The integers to analyze.</param>
         /// <returns>The mean value in the array.</returns>
-        public static double Mean(int[] source)
-        {
-            var list = new List<int>(source);
-            return list.Average();
-        }
+        public static double Mean(int[] source) => source.Average();
 
         /// <summary>
         /// Returns the minimum value from an array of integers.
